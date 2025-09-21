@@ -1,0 +1,49 @@
+/* Global styles */
+:root {
+  /* Brand colors */
+  --primary-color: #00202A; /* Brand deep blue-teal */
+  --primary-light: #E6EEF1; /* Lightest tint of primary */
+  --secondary-color: #86C554; /* Accent green */
+  --secondary-light: #E9F6E1; /* Light tint of secondary */
+  --secondary-dark: #6DA642; /* Darker shade of secondary */
+  
+  /* UI colors */
+  --success-color: #86C554; /* Same as secondary for consistency */
+  --error-color: #e74c3c; /* Keep red for errors */
+  --background-color: #F7F9FB; /* Light background */
+  --surface-color: #FFFFFF; /* Surface/card color */
+  --border-color: #E3E8EE; /* Border color */
+  --text-color: #0B1215; /* Dark text */
+  --text-secondary: #27343A; /* Secondary text */
+  
+  /* UI properties */
+  --border-radius: 12px; /* Rounded corners */
+  --box-shadow: 0 4px 12px rgba(0, 32, 42, 0.08); /* Subtle shadow */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5em;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
