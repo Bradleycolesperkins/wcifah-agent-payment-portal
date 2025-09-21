@@ -18,7 +18,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:5173',
+    'https://wcifah-agent-payment-portal.vercel.app'
+  ],
   credentials: true,
 }));
 
@@ -69,12 +72,19 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }
     
     // Create Checkout Session
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    // Use the request origin if it's from the production site
+    const origin = req.headers.origin;
+    const baseUrl = (origin === 'https://wcifah-agent-payment-portal.vercel.app') 
+      ? origin 
+      : frontendUrl;
+      
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/failed`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/failed`,
       metadata: {
         package: packageName,
         viewingAddonEnabled: viewingAddonEnabled ? 'true' : 'false',
